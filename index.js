@@ -13,17 +13,25 @@ const loadData = (city) => {
 
 }
 
-const displayWeather = (city) => {
-    console.log (city.weather[0])
+const displayWeather = ({name, main, weather}) => {
 
 
     const cityName = document.getElementById('name');
     const temp = document.getElementById ('temp');
     const lead = document.getElementById ('lead');
-    cityName.innerHTML = city.name;
-    temp.innerHTML = city.main.temp;
-    lead.innerHTML = city.weather[0].main;
+   if (cityName && temp && lead) {
 
+    cityName.innerHTML = name;
+    temp.innerHTML = main.temp;
+    lead.innerHTML = weather[0].main;
+
+
+   }
+
+   else {
+
+    alert ('Weather not found')
+   }
 
 
 
@@ -35,10 +43,27 @@ const displayWeather = (city) => {
  const search = (city) => { 
 
 
-    const searchInp = document.getElementById ('searchInp').value;
+    const searchInp = document.getElementById ('searchInp');
+    const search = searchInp.value;
+    const cityName = document.getElementById('name');
 
 
-    loadData (searchInp)
+
+    if (search) {
+
+        loadData (search)}
+
+    else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please Input a value',
+          })
+    }
+
+
+
+    searchInp.value = ""
 
 
     
